@@ -77,10 +77,11 @@ export function initHeroLiquid(imgEl) {
       position: 'absolute', inset: '0', width: '100%', height: '100%',
       display: 'block',
     });
+    const prog = createProgram(gl, VERT, FRAG);
+    if (!prog) return; // shader falló → no tocamos la <img>, queda estática
+
     imgEl.parentElement.appendChild(canvas);
     imgEl.style.visibility = 'hidden'; // se mantiene en DOM para SEO/fallback
-
-    const prog = createProgram(gl, VERT, FRAG);
     gl.useProgram(prog);
 
     const buf = gl.createBuffer();
@@ -174,10 +175,12 @@ function createTexture(gl, img) {
 function createProgram(gl, vsrc, fsrc) {
   const vs = compile(gl, gl.VERTEX_SHADER, vsrc);
   const fs = compile(gl, gl.FRAGMENT_SHADER, fsrc);
+  if (!vs || !fs) return null;
   const p = gl.createProgram();
   gl.attachShader(p, vs);
   gl.attachShader(p, fs);
   gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) return null;
   return p;
 }
 
@@ -185,5 +188,6 @@ function compile(gl, type, src) {
   const s = gl.createShader(type);
   gl.shaderSource(s, src);
   gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) return null;
   return s;
 }

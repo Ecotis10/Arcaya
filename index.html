@@ -14,6 +14,9 @@
   <meta property="og:title" content="Arcaya · Bistró del casco histórico de Coro" />
   <meta property="og:description" content="Cocina falconiana de autor en una casona colonial de Coro." />
   <meta property="og:locale" content="es_VE" />
+  <meta property="og:url" content="https://arcaya.restaurant/" />
+  <meta property="og:image" content="https://arcaya.restaurant/img/hero.webp" />
+  <meta property="og:image:alt" content="Patio colonial de Arcaya al atardecer" />
 
   <!-- Fonts: Fraunces (display) + Hanken Grotesk (body) — ni Inter ni Roboto -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,6 +30,9 @@
     "name": "Arcaya",
     "servesCuisine": "Falconiana de autor",
     "priceRange": "$$$",
+    "url": "https://arcaya.restaurant/",
+    "image": "https://arcaya.restaurant/img/hero.webp",
+    "telephone": "+58-412-000-0000",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Calle Zamora, casco histórico",
@@ -34,7 +40,13 @@
       "addressRegion": "Falcón",
       "addressCountry": "VE"
     },
-    "acceptsReservations": "True"
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "12:00",
+      "closes": "23:00"
+    },
+    "acceptsReservations": true
   }
   </script>
 </head>
@@ -219,7 +231,7 @@
             Confirmamos por WhatsApp en minutos. Para grupos de más de seis,
             escríbenos directo y lo organizamos contigo.
           </p>
-          <a href="#" class="btn btn--solid reserve__wa" data-whatsapp>
+          <a href="https://wa.me/584120000000" class="btn btn--solid reserve__wa" data-whatsapp>
             Reservar por WhatsApp
           </a>
         </div>
@@ -252,7 +264,7 @@
             <input id="r-note" name="note" type="text" placeholder="Cumpleaños, alergias, mesa en el patio…" />
           </div>
           <button type="submit" class="btn btn--solid reserve__submit">Solicitar reserva</button>
-          <p class="reserve__success" data-success hidden>
+          <p class="reserve__success" data-success role="status" aria-live="polite" hidden>
             ¡Gracias! Hemos recibido tu solicitud. Te confirmamos por WhatsApp enseguida.
           </p>
         </form>
@@ -277,7 +289,7 @@
           </div>
           <div class="visit__block">
             <h3>Contacto</h3>
-            <p><a href="#" data-whatsapp>+58 412 000 0000</a><br />hola@arcaya.restaurant</p>
+            <p><a href="https://wa.me/584120000000" data-whatsapp>+58 412 000 0000</a><br />hola@arcaya.restaurant</p>
           </div>
         </div>
       </div>

@@ -93,7 +93,10 @@ function setReveals() {
   if (revealsDone) return;
   revealsDone = true;
   if (reduceMotion) {
-    gsap.set('[data-rise], [data-stagger] > *, [data-dish], [data-lines] .line-inner', { opacity: 1, y: 0 });
+    // sin animación: revelar TODO de inmediato. Ojo: aquí se usa [data-lines]
+    // (el contenedor), no .line-inner — splitToLines no corre en reduce-motion,
+    // así que .line-inner no existe y los títulos quedarían invisibles.
+    gsap.set('[data-rise], [data-stagger] > *, [data-dish], [data-lines]', { opacity: 1, y: 0 });
     return;
   }
 
@@ -174,7 +177,6 @@ function splitToLines(el) {
   const text = el.textContent.trim();
   const words = text.split(/\s+/);
   el.textContent = '';
-  const wrapper = document.createDocumentFragment();
   // medimos por palabra para detectar saltos de línea reales
   const probe = words.map((w) => {
     const s = document.createElement('span');
@@ -205,7 +207,6 @@ function splitToLines(el) {
     line.appendChild(inner);
     el.appendChild(line);
   });
-  wrapper; // noop
   el.dataset.split = '1';
 }
 
